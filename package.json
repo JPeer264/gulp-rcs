@@ -1,0 +1,41 @@
+{
+  "name": "gulp-rcs",
+  "version": "0.0.0",
+  "description": "The gulp plugin for rcs-core",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [
+    "gulpplugin",
+    "gulp",
+    "css",
+    "minify",
+    "rename",
+    "selectors",
+    "shrink",
+    "classes",
+    "compress",
+    "styles",
+    "munch"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JPeer264/gulp-rcs.git"
+  },
+  "author": "Jan Peer Stöcklmair <janpeer264@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JPeer264/gulp-rcs/issues"
+  },
+  "homepage": "https://github.com/JPeer264/gulp-rcs#readme",
+  "dependencies": {
+    "rcs-core": "^0.0.4",
+    "through2": "^2.0.3"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "gulp": "^3.9.1",
+    "mocha": "^3.2.0"
+  }
+}
