@@ -334,6 +334,12 @@ fs.realpath@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/fs.realpath/-/fs.realpath-1.0.0.tgz#1504ad2523158caa40db4a2787cb01411994ea4f"
 
+funsert@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/funsert/-/funsert-0.1.1.tgz#fc9c32e002304c4a3b014ceabd49a556920de622"
+  dependencies:
+    predicates "^1.0.1"
+
 gaze@^0.5.1:
   version "0.5.2"
   resolved "https://registry.yarnpkg.com/gaze/-/gaze-0.5.2.tgz#40b709537d24d1d45767db5a908689dfe69ac44f"
@@ -460,7 +466,7 @@ growl@1.9.2:
   version "1.9.2"
   resolved "https://registry.yarnpkg.com/growl/-/growl-1.9.2.tgz#0ea7743715db8d8de2c5ede1775e1b45ac85c02f"
 
-gulp-util@^3.0.0:
+gulp-util@^3.0.0, gulp-util@^3.0.7:
   version "3.0.7"
   resolved "https://registry.yarnpkg.com/gulp-util/-/gulp-util-3.0.7.tgz#78925c4b8f8b49005ac01a011c557e6218941cbb"
   dependencies:
@@ -1089,6 +1095,10 @@ pinkie@^2.0.0:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/pinkie/-/pinkie-2.0.4.tgz#72556b80cfa0d48a974e80e77248e80ed4f7f870"
 
+predicates@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/predicates/-/predicates-1.0.1.tgz#fa30b07e3c8f4083d0dc09443d445f2d49ed3102"
+
 preserve@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/preserve/-/preserve-0.2.0.tgz#815ed1f6ebc65926f865b310c0713bcb3315ce4b"
@@ -1249,6 +1259,12 @@ spdx-expression-parse@~1.0.0:
 spdx-license-ids@^1.0.2:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/spdx-license-ids/-/spdx-license-ids-1.2.2.tgz#c9df7a3424594ade6bd11900d596696dc06bac57"
+
+stream-assert@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/stream-assert/-/stream-assert-2.0.3.tgz#1ba8a34b67dea06b00ee39261ca6041437233e32"
+  dependencies:
+    through2 "^0.6.1"
 
 stream-consume@~0.1.0:
   version "0.1.0"
