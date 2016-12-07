@@ -30,11 +30,12 @@
   },
   "homepage": "https://github.com/JPeer264/gulp-rcs#readme",
   "dependencies": {
-    "rcs-core": "^0.0.4",
+    "rcs-core": "0.*.*",
     "through2": "^2.0.3"
   },
   "devDependencies": {
     "chai": "^3.5.0",
+    "fs-extra": "^1.0.0",
     "gulp": "^3.9.1",
     "mocha": "^3.2.0"
   }
