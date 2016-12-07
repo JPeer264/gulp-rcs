@@ -1,22 +1,35 @@
-const fs   = require('fs-extra');
-const rcs  = require('../');
-const path = require('path');
-const gulp = require('gulp');
+const fs     = require('fs-extra');
+const rcs    = require('../');
+const rcsCore = require('rcs-core');
+const path   = require('path');
+const gulp   = require('gulp');
+const expect = require('chai').expect;
+const assert = require('stream-assert');
+const is = require('funsert');
 
 const testFiles = './test/files';
-const fixtures = testFiles + '/fixtures';
-const temp = testFiles + '/tmp';
+const temp      = testFiles + '/tmp';
+const results   = testFiles + '/results';
+const fixtures  = testFiles + '/fixtures';
 
 describe('gulp-rcs', () => {
+    beforeEach(() => {
+        // reset counter and selectors for tests
+        rcsCore.selectorLibrary.selectors           = {};
+        rcsCore.selectorLibrary.compressedSelectors = {};
+        rcsCore.selectorLibrary.excludes            = [];
+        rcsCore.nameGenerator.resetCountForTests();
+    });
+
     after(() => {
         fs.removeSync(temp);
     });
 
-    it('should rename files', () => {
-        gulp.src([fixtures + '/**/*.css', fixtures + '/**/*.*'])
+    it('should rename files', done => {
+        gulp.src([fixtures + '/style.css', fixtures + '/main.txt', fixtures + '/index.html'])
             .pipe(rcs())
-            .pipe(gulp.dest(temp));
-
-        // @todo set expect tests here
+            .pipe(gulp.dest(temp))
+            .pipe(assert.second(is.equal(fs.readFileSync(results + '/style.css'))))
+            .pipe(assert.end(done))
     });
 });
