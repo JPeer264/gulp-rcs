@@ -3,6 +3,7 @@
 const path = require('path');
 const rcs = require('rcs-core');
 const through = require('through2');
+const gutil = require('gulp-util');
 
 module.exports = opt => {
     opt = opt || {};
@@ -16,14 +17,31 @@ module.exports = opt => {
 
         // @todo check if file.relative exists in opt.css
         if (path.extname(file.relative) === '.css') {
-            // @todo save all selectors into selectorLibrary from rcs-core
-            console.log(file.relative)
+            rcs.replace.fileCss(file.path, (err, data) => {
+                let newFile = new gutil.File({
+                    cwd: file.cwd,
+                    base: file.base,
+                    path: file.path,
+                    contents: new Buffer(data.data)
+                });
+
+                this.push(newFile);
+
+                cb();
+            });
+        } else {
+            rcs.replace.file(file.path, (err, data) => {
+                let newFile = new gutil.File({
+                    cwd: file.cwd,
+                    base: file.base,
+                    path: file.path,
+                    contents: new Buffer(data.data)
+                });
+
+                this.push(newFile);
+
+                cb();
+            });
         }
-
-        // @todo rename this file based on the selectorLibrary from rcs-core
-
-        this.push(file);
-
-        cb();
     });
 }
