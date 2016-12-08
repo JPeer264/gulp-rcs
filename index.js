@@ -11,7 +11,9 @@ module.exports = opt => {
     opt.css = opt.css || ['css'];
 
     return through.obj(function (file, enc, cb) {
-        let replaceFunction = rcs.replace.file;
+        let data;
+        let newFile;
+        let replaceFunction = rcs.replace.buffer;
 
         if (file.isNull()) {
             return cb(null, file);
@@ -24,28 +26,21 @@ module.exports = opt => {
 
         // @todo check if file.relative exists in opt.css
         if (path.extname(file.relative) === '.css') {
-            replaceFunction = rcs.replace.fileCss;
+            replaceFunction = rcs.replace.bufferCss;
         }
 
         // calling the replace function from rcs-core
-        replaceFunction(file.path, (err, data) => {
-            if (err) {
-                this.emit('error', new gutil.PluginError('gulp-rcs', err, {
-                    fileName: file.path,
-                    showProperties: false
-                }));
-            }
+        data = replaceFunction(file.contents);
 
-            let newFile = new gutil.File({
-                cwd: file.cwd,
-                base: file.base,
-                path: file.path,
-                contents: new Buffer(data.data)
-            });
-
-            this.push(newFile);
-
-            cb();
+        newFile = new gutil.File({
+            cwd: file.cwd,
+            base: file.base,
+            path: file.path,
+            contents: data
         });
+
+        this.push(newFile);
+
+        cb();
     });
 };

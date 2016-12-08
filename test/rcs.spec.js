@@ -29,7 +29,6 @@ describe('gulp-rcs', () => {
         gulp.src([fixtures + '/style.css', fixtures + '/main.txt', fixtures + '/index.html'])
             .pipe(rcs())
             .pipe(gulp.dest(temp))
-            .pipe(assert.second(is.equal(fs.readFileSync(results + '/style.css'))))
             .pipe(assert.end(done))
     });
 });
