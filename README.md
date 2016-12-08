@@ -2,6 +2,8 @@
 
 > [rcs](https://www.github.com/jpeer264/node-rcs-core) plugin for [Gulp](https://github.com/gulpjs/gulp).
 
+> Minify all CSS selectors across all files
+
 ## Install
 
 ```sh
@@ -36,23 +38,22 @@ Splitted (e.g. w/ [gulp-sass](https://github.com/dlmanning/gulp-sass)):
 const rcs = require('gulp-rcs');
 const sass = require('gulp-sass');
 
-gulp.task('css', (done) => {
-    gulp.src('./src/sass/**/*.scss')
+gulp.task('css', () => {
+    return gulp.src('./src/sass/**/*.scss')
         .pipe(sass().on('error', sass.logError))
         .pipe(rcs())
         .pipe(gulp.dest('./dist/'));
-
-    done();
 });
 
-gulp.task('remainings', (done) => {
+// here we will wait until, css is finished
+gulp.task('remainings', ['css'], () => {
     // note that 'scss' files are here ignored
-    gulp.src(['!./src/sass/**/*.scss', './src/**/*.js', './src/**/*.html'])
+    return gulp.src(['!./src/sass/**/*.scss', './src/**/*.js', './src/**/*.html'])
         .pipe(rcs())
         .pipe(gulp.dest('./dist/'));
-
-    done();
 });
+
+gulp.task('default', ['css', 'remainings']);
 ```
 
 ## License
