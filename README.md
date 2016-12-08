@@ -1,5 +1,7 @@
 # gulp-rcs
 
+[![Build Status](https://travis-ci.org/JPeer264/gulp-rcs.svg?branch=master)](https://travis-ci.org/JPeer264/gulp-rcs)
+
 > [rcs](https://www.github.com/jpeer264/node-rcs-core) plugin for [Gulp](https://github.com/gulpjs/gulp).
 
 > Minify all CSS selectors across all files
