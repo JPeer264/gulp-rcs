@@ -1,7 +1,7 @@
 {
   "name": "gulp-rcs",
   "version": "0.0.2",
-  "description": "The gulp plugin for rcs-core",
+  "description": "Minify all CSS selectors. The gulp plugin for rcs-core",
   "main": "index.js",
   "scripts": {
     "test": "mocha"
@@ -17,7 +17,11 @@
     "classes",
     "compress",
     "styles",
-    "munch"
+    "munch",
+    "shorten",
+    "trim",
+    "reduce",
+    "downsize"
   ],
   "repository": {
     "type": "git",
