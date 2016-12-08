@@ -1,6 +1,6 @@
 {
   "name": "gulp-rcs",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "The gulp plugin for rcs-core",
   "main": "index.js",
   "scripts": {
@@ -37,9 +37,6 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "fs-extra": "^1.0.0",
-    "funsert": "^0.1.1",
-    "gulp": "^3.9.1",
-    "mocha": "^3.2.0",
-    "stream-assert": "^2.0.3"
+    "mocha": "^3.2.0"
   }
 }
