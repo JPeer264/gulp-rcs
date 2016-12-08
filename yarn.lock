@@ -671,6 +671,13 @@ isobject@^2.0.0:
   dependencies:
     isarray "1.0.0"
 
+json-extra@^0.5.0:
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/json-extra/-/json-extra-0.5.0.tgz#5b8d9b645a76bf4187ef93ed781d2685561dc850"
+  dependencies:
+    fs-extra "^1.0.0"
+    lodash.includes "^4.3.0"
+
 json3@3.3.2:
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/json3/-/json3-3.3.2.tgz#3c0434743df93e2f5c42aee7b19bcb483575f4e1"
@@ -781,6 +788,10 @@ lodash.escape@^3.0.0:
   resolved "https://registry.yarnpkg.com/lodash.escape/-/lodash.escape-3.2.0.tgz#995ee0dc18c1b48cc92effae71a10aab5b487698"
   dependencies:
     lodash._root "^3.0.0"
+
+lodash.includes@^4.3.0:
+  version "4.3.0"
+  resolved "https://registry.yarnpkg.com/lodash.includes/-/lodash.includes-4.3.0.tgz#60bb98a87cb923c68ca1e51325483314849f553f"
 
 lodash.isarguments@^3.0.0:
   version "3.1.0"
@@ -1118,12 +1129,13 @@ randomatic@^1.1.3:
     is-number "^2.0.2"
     kind-of "^3.0.2"
 
-rcs-core@0.*.*:
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/rcs-core/-/rcs-core-0.0.4.tgz#66e8806bed22bae9769f9af03b7dcaa7ab08dff6"
+rcs-core@^0.*.*:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/rcs-core/-/rcs-core-0.1.1.tgz#774e0e4fc7bba829fdf9925a6270ef5cc852dab9"
   dependencies:
     decimal-to-any "^1.0.0"
     fs-extra "^0.30.0"
+    json-extra "^0.5.0"
     lodash "^4.16.4"
 
 read-pkg-up@^1.0.1:
