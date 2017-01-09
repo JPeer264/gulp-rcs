@@ -54,4 +54,49 @@ describe('gulp-rcs', () => {
 
         stream.end();
     });
+
+    it('should exclude a specific file', done => {
+        const stream = rcs({
+            exclude: '**/ignore.js'
+        });
+
+        stream.on('data', file => {
+            const contents = file.contents.toString();
+            const filename = path.basename(file.path);
+
+            expect(contents).to.equal(fs.readFileSync(results + '/' + filename, 'utf8'));
+        });
+
+        stream.on('end', done);
+
+        stream.write(new gutil.File({
+            cwd: __dirname,
+            base: fixtures,
+            path: fixtures + '/style.css',
+            contents: fs.readFileSync(fixtures + '/style.css')
+        }));
+
+        stream.write(new gutil.File({
+            cwd: __dirname,
+            base: results,
+            path: results + '/ignore.js',
+            contents: fs.readFileSync(results + '/ignore.js')
+        }));
+
+        stream.write(new gutil.File({
+            cwd: __dirname,
+            base: fixtures,
+            path: fixtures + '/main.js',
+            contents: fs.readFileSync(fixtures + '/main.js')
+        }));
+
+        stream.write(new gutil.File({
+            cwd: __dirname,
+            base: fixtures,
+            path: fixtures + '/index.html',
+            contents: fs.readFileSync(fixtures + '/index.html')
+        }));
+
+        stream.end();
+    });
 });

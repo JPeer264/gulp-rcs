@@ -58,6 +58,31 @@ gulp.task('remainings', ['css'], () => {
 gulp.task('default', ['css', 'remainings']);
 ```
 
+## options
+
+```js
+const rcs = require('gulp-rcs');
+
+gulp.task('myTask', () => {
+    return gulp.src('**/*')
+        .pipe(rcs([options]))
+        .pipe(gulp.dest('./dist/'));
+});
+```
+
+### options.exclude
+
+Type: `Array` or `String`, any valid `glob` statement
+
+```js
+...
+    .pipe(rcs({
+        exclude: ['**/vendor.js', '**/another.js']
+    }))
+...
+```
+
+
 ## License
 
 MIT © [Jan Peer Stöcklmair](https://www.jpeer.at/)
