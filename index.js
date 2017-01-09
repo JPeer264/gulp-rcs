@@ -32,6 +32,8 @@ module.exports = opt => {
 
         // if file is excluded
         if (gmatch(file, opt.exclude)) {
+            this.push(file);
+
             return cb();
         }
 
