@@ -40,14 +40,9 @@ module.exports = opt => {
         // calling the replace function from rcs-core
         data = replaceFunction(file.contents);
 
-        newFile = new gutil.File({
-            cwd: file.cwd,
-            base: file.base,
-            path: file.path,
-            contents: data
-        });
+        file.contents = data;
 
-        this.push(newFile);
+        this.push(file);
 
         cb();
     });
