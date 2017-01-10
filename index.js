@@ -29,7 +29,6 @@ module.exports = opt => {
             return;
         }
 
-        // @todo check if file.relative exists in opt.css
         if (includes(opt.css, path.extname(file.relative))) {
             replaceFunction = rcs.replace.bufferCss;
         }
