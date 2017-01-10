@@ -9,13 +9,13 @@
 ## Install
 
 ```sh
-npm install gulp-rcs --save
+npm i gulp-rcs -D
 ```
 
 or
 
 ```sh
-yarn add gulp-rcs
+yarn add gulp-rcs --dev
 ```
 
 ## Basic Usage
