@@ -99,4 +99,36 @@ describe('gulp-rcs', () => {
 
         stream.end();
     });
+
+    it('should fail, just scss files allowed', done => {
+        // just scss files are allowed. Failed because just CSS files are loaded
+        const stream = rcs({
+            css: '.scss'
+        });
+
+        stream.on('data', file => {
+            const contents = file.contents.toString();
+            const filename = path.basename(file.path);
+
+            expect(contents).to.not.equal(fs.readFileSync(results + '/' + filename, 'utf8'));
+        });
+
+        stream.on('end', done);
+
+        stream.write(new gutil.File({
+            cwd: __dirname,
+            base: fixtures,
+            path: fixtures + '/style.css',
+            contents: fs.readFileSync(fixtures + '/style.css')
+        }));
+
+        stream.write(new gutil.File({
+            cwd: __dirname,
+            base: fixtures,
+            path: fixtures + '/main.js',
+            contents: fs.readFileSync(fixtures + '/main.js')
+        }));
+
+        stream.end();
+    });
 });

@@ -34,6 +34,7 @@
   },
   "homepage": "https://github.com/JPeer264/gulp-rcs#readme",
   "dependencies": {
+    "array-includes": "^3.0.2",
     "gulp-match": "^1.0.3",
     "gulp-util": "^3.0.7",
     "rcs-core": "0.*.*",

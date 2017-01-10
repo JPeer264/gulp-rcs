@@ -1,20 +1,24 @@
 'use strict';
 
-const rcs     = require('rcs-core');
-const path    = require('path');
-const gutil   = require('gulp-util');
-const gmatch  = require('gulp-match');
-const through = require('through2');
+const rcs      = require('rcs-core');
+const path     = require('path');
+const gutil    = require('gulp-util');
+const gmatch   = require('gulp-match');
+const through  = require('through2');
+const includes = require('array-includes');
 
 module.exports = opt => {
     opt = opt || {};
 
-    opt.css = opt.css || ['css'];
+    opt.css = opt.css || ['.css', '.sass', '.scss'];
+    opt.css = typeof opt.css === 'string' ? [ opt.css ] : opt.css;
 
     return through.obj(function (file, enc, cb) {
         let data;
         let newFile;
         let replaceFunction = rcs.replace.buffer;
+
+        const fileExt = path.extname(file.relative);
 
         if (file.isNull()) {
             return cb(null, file);
@@ -26,7 +30,7 @@ module.exports = opt => {
         }
 
         // @todo check if file.relative exists in opt.css
-        if (path.extname(file.relative) === '.css') {
+        if (includes(opt.css, path.extname(file.relative))) {
             replaceFunction = rcs.replace.bufferCss;
         }
 

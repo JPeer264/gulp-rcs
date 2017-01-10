@@ -72,12 +72,30 @@ gulp.task('myTask', () => {
 
 ### options.exclude
 
+Excludes specific files or directories.
+
 Type: `Array` or `String`, any valid `glob` statement
 
 ```js
 ...
     .pipe(rcs({
         exclude: ['**/vendor.js', '**/another.js']
+    }))
+...
+```
+
+### options.css
+
+Enable specific CSS files. Any given extension will be excepted.
+
+Type: `Array` or `String`
+
+In the following example only `.css` and `.scss` files will rename new selectors.
+
+```js
+...
+    .pipe(rcs({
+        css: ['.css', '.scss']
     }))
 ...
 ```
