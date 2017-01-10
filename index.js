@@ -18,8 +18,6 @@ module.exports = opt => {
         let newFile;
         let replaceFunction = rcs.replace.buffer;
 
-        const fileExt = path.extname(file.relative);
-
         if (file.isNull()) {
             return cb(null, file);
         }
