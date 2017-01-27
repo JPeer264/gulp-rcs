@@ -39,7 +39,11 @@ module.exports = opt => {
         }
 
         // calling the replace function from rcs-core
-        data = replaceFunction(file.contents);
+        data = replaceFunction(file.contents, {
+            prefix: opt.prefix,
+            suffix: opt.suffix,
+            preventRandomName: opt.preventRandomName,
+        });
 
         file.contents = data;
 
