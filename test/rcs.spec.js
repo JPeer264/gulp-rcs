@@ -55,6 +55,29 @@ describe('gulp-rcs', () => {
         stream.end();
     });
 
+    it('should rename all files with prefixed', done => {
+        const stream = rcs({
+            prefix: 'prefixed-'
+        });
+
+        stream.on('data', file => {
+            const contents = file.contents.toString();
+
+            expect(contents).to.equal(fs.readFileSync(results + '/style-prefix.css', 'utf8'));
+        });
+
+        stream.on('end', done);
+
+        stream.write(new gutil.File({
+            cwd: __dirname,
+            base: fixtures,
+            path: fixtures + '/style.css',
+            contents: fs.readFileSync(fixtures + '/style.css')
+        }));
+
+        stream.end();
+    });
+
     it('should exclude a specific file', done => {
         const stream = rcs({
             exclude: '**/ignore.js'
