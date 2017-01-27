@@ -60,6 +60,14 @@ gulp.task('default', ['css', 'remainings']);
 
 ## options
 
+- [exclude](#optionsexclude)
+- [css](#optionscss)
+- [prefix](#optionsprefix)
+- [suffix](#optionssuffix)
+- [preventRandomName](#optionspreventrandomname)
+
+**Short example how it could look like:**
+
 ```js
 const rcs = require('gulp-rcs');
 
@@ -96,6 +104,49 @@ In the following example only `.css` and `.scss` files will rename new selectors
 ...
     .pipe(rcs({
         css: ['.css', '.scss']
+    }))
+...
+```
+
+### options.prefix
+
+Prefixes all selectors, excluding the exludes.
+
+Type: `String`
+
+```js
+...
+    .pipe(rcs({
+        prefix: 'my-super-cool-prefix-'
+    }))
+...
+```
+
+### options.suffix
+
+Suffixes all selectors, excluding the exludes.
+
+Type: `String`
+
+```js
+...
+    .pipe(rcs({
+        suffix: '-my-suffix'
+    }))
+...
+```
+
+### options.preventRandomName
+
+Does not rename the selectors (good for prefixing/suffixing).
+
+Type: `Boolean`
+
+```js
+...
+    .pipe(rcs({
+        preventRandomName: true,
+        prefix: 'my-super-cool-prefix-' // prefix it, otherwise there is no real effect
     }))
 ...
 ```
