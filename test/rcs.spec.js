@@ -55,7 +55,7 @@ describe('gulp-rcs', () => {
         stream.end();
     });
 
-    it('should rename all files with prefixed', done => {
+    it('should rename all files with prefixes', done => {
         const stream = rcs({
             prefix: 'prefixed-'
         });
