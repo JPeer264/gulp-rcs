@@ -37,7 +37,7 @@
     "array-includes": "^3.0.2",
     "gulp-match": "^1.0.3",
     "gulp-util": "^3.0.7",
-    "rcs-core": "0.*.*",
+    "rcs-core": "^0.2.0",
     "through2": "^2.0.3"
   },
   "devDependencies": {
