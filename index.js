@@ -27,12 +27,14 @@ module.exports = opt => {
             return;
         }
 
+        rcs.selectorLibrary.setExclude(opt.exclude);
+
         if (includes(opt.css, path.extname(file.relative))) {
             replaceFunction = rcs.replace.bufferCss;
         }
 
         // if file is excluded
-        if (gmatch(file, opt.exclude)) {
+        if (gmatch(file, opt.excludeFile)) {
             this.push(file);
 
             return cb();
