@@ -123,12 +123,36 @@ describe('gulp-rcs', () => {
         stream.end();
     });
 
-    it('should exclude a specific selectors', done => {
+    it('should exclude specific selectors', done => {
         const stream = rcs({
             exclude: [
                 'js',
                 'no-js'
             ]
+        });
+
+        stream.on('data', file => {
+            const contents = file.contents.toString();
+            const filename = path.basename(file.path);
+
+            expect(contents).to.equal(fs.readFileSync(results + '/style-with-exclude.css', 'utf8'));
+        });
+
+        stream.on('end', done);
+
+        stream.write(new gutil.File({
+            cwd: __dirname,
+            base: fixtures,
+            path: fixtures + '/style.css',
+            contents: fs.readFileSync(fixtures + '/style.css')
+        }));
+
+        stream.end();
+    });
+
+    it('should exclude specific selectors from config', done => {
+        const stream = rcs({
+            config: testFiles + '/config.json'
         });
 
         stream.on('data', file => {

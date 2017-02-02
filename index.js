@@ -2,6 +2,7 @@
 
 const rcs      = require('rcs-core');
 const path     = require('path');
+const json     = require('json-extra');
 const gutil    = require('gulp-util');
 const gmatch   = require('gulp-match');
 const through  = require('through2');
@@ -25,6 +26,10 @@ module.exports = opt => {
         if (file.isStream()) {
             cb(new gutil.PluginError('gulp-rcs', 'Streaming not supported'));
             return;
+        }
+
+        if (opt.config !== false) {
+            includeConfig(opt.config);
         }
 
         rcs.selectorLibrary.setExclude(opt.exclude);
@@ -53,4 +58,21 @@ module.exports = opt => {
 
         cb();
     });
+
+    function includeConfig(pathString) {
+        let configObject;
+
+        pathString   = pathString || path.join(process.cwd(), '.rcsrc');
+        configObject = json.readToObjSync(pathString);
+
+        if (!configObject) {
+            // package.json .rcs if no other config is found
+            configObject = json.readToObjSync(path.join(process.cwd(), 'package.json')).rcs;
+        }
+
+
+        if (configObject && configObject.exclude) {
+            rcs.selectorLibrary.setExclude(configObject.exclude);
+        }
+    }; // /includeConfig
 };

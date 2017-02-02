@@ -60,7 +60,9 @@ gulp.task('default', ['css', 'remainings']);
 
 ## options
 
+- [excludeFile](#optionsexcludefile)
 - [exclude](#optionsexclude)
+- [config](#optionsconfig)
 - [css](#optionscss)
 - [prefix](#optionsprefix)
 - [suffix](#optionssuffix)
@@ -78,7 +80,7 @@ gulp.task('myTask', () => {
 });
 ```
 
-### options.exclude
+### options.excludeFile
 
 Excludes specific files or directories.
 
@@ -87,7 +89,35 @@ Type: `Array` or `String`, any valid `glob` statement
 ```js
 ...
     .pipe(rcs({
-        exclude: ['**/vendor.js', '**/another.js']
+        excludeFile: ['**/vendor.js', '**/another.js']
+    }))
+...
+```
+
+### options.exclude
+
+Excludes specific selectors.
+
+Type: `Array` or `String`
+
+```js
+...
+    .pipe(rcs({
+        exclude: ['any-selector', 'to-exclude']
+    }))
+...
+```
+
+### options.config
+
+Set another path to the config file. If set to `false` it will not load any config file.
+
+Type: `String` or `Boolean`
+
+```js
+...
+    .pipe(rcs({
+        config: './path/to/config/file'
     }))
 ...
 ```
