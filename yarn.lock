@@ -666,9 +666,9 @@ process-nextick-args@~1.0.6:
   version "1.0.7"
   resolved "https://registry.yarnpkg.com/process-nextick-args/-/process-nextick-args-1.0.7.tgz#150e20b756590ad3f91093f25a4f2ad8bff30ba3"
 
-rcs-core@^0.2.1:
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/rcs-core/-/rcs-core-0.2.1.tgz#d7f950af4893f7e9dff2be1e246380a324248309"
+rcs-core@^0.5.1:
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/rcs-core/-/rcs-core-0.5.1.tgz#7fb06c0a564a6757780193c5cee4d28b28e0de9d"
   dependencies:
     decimal-to-any "^1.0.0"
     fs-extra "^2.0.0"
