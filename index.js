@@ -8,7 +8,7 @@ const gmatch   = require('gulp-match');
 const through  = require('through2');
 const includes = require('array-includes');
 
-module.exports = opt => {
+const rcsExport = opt => {
     opt = opt || {};
 
     opt.css = opt.css || ['.css', '.sass', '.scss'];
@@ -76,3 +76,8 @@ module.exports = opt => {
         }
     }; // /includeConfig
 };
+
+rcsExport.loadMapping = require('./lib/loadMapping');
+rcsExport.writeMapping = require('./lib/writeMapping');
+
+module.exports = rcsExport;
