@@ -50,4 +50,24 @@ describe('loadMapping', () => {
 
         stream.end();
     });
+
+    it('should load the mappings object correctly', done => {
+        const stream = rcs();
+
+        rcs.loadMapping({
+            '.a': 'jp-block',
+            '.e': 'jp-pseudo'
+        }, { origValues: false });
+
+        stream.on('data', () => {});
+
+        stream.on('end', () => {
+            expect(rcsCore.selectorLibrary.get('jp-block')).to.equal('a');
+            expect(rcsCore.selectorLibrary.get('.jp-pseudo')).to.equal('e');
+
+            done();
+        });
+
+        stream.end();
+    });
 });
