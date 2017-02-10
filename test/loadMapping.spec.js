@@ -5,7 +5,7 @@ const gutil   = require('gulp-util');
 const expect  = require('chai').expect;
 const rcsCore = require('rcs-core');
 
-describe.only('loadMapping', () => {
+describe('loadMapping', () => {
     beforeEach(() => {
         // reset counter and selectors for tests
         rcsCore.selectorLibrary.excludes            = [];
