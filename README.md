@@ -6,6 +6,13 @@
 
 > Minify all CSS selectors across all files
 
+## Overview
+
+- [Install](#install)
+- [Basic Usage](#basic-usage-w-gulp-v3)
+- [RCS Options](#options)
+- [RCS Methods](#methods)
+
 ## Install
 
 ```sh
@@ -18,9 +25,9 @@ or
 yarn add gulp-rcs --dev
 ```
 
-## Basic Usage
+## Basic Usage (w/ Gulp v3)
 
-> Make sure that you load all `css` files first.
+> Make sure that you load all `css` files first. Files should **not** be minified/uglified.
 
 All files at once:
 
@@ -58,11 +65,28 @@ gulp.task('remainings', ['css'], () => {
 gulp.task('default', ['css', 'remainings']);
 ```
 
+Working with mappings (the mapping can look like [this](https://github.com/JPeer264/gulp-rcs/blob/master/test/files/results/renaming_map.json)):
+
+```js
+const rcs = require('gulp-rcs');
+
+gulp.task('all', () => {
+    return gulp.src(['./src/**/*.css', './src/**/*.js', './src/**/*.html'])
+        .pipe(rcs({
+            mapping: './config/renaming_map.json'
+        }))
+        ...
+        .pipe(rcs.saveMapping('./config'))
+})
+```
+
 ## options
 
 - [excludeFile](#optionsexcludefile)
 - [exclude](#optionsexclude)
 - [config](#optionsconfig)
+- [mapping](#optionsmapping)
+- [mappingOrigValues](#optionsmappingorigvalues)
 - [css](#optionscss)
 - [prefix](#optionsprefix)
 - [suffix](#optionssuffix)
@@ -118,6 +142,35 @@ Type: `String` or `Boolean`
 ...
     .pipe(rcs({
         config: './path/to/config/file'
+    }))
+...
+```
+
+### options.mapping
+
+Loads the mapping file to have always the same consistent renamings. Mappings can be loaded although they do not exist yet
+
+Type: `String`
+
+```js
+...
+    .pipe(rcs({
+        mapping: 'path/to/the/mapping.json'
+    }))
+...
+```
+
+### options.mappingOrigValues
+
+In case the min version of the mapping is saved, you have to set this option to `false`. Default: `true`
+
+Type: `Boolean`
+
+```js
+...
+    .pipe(rcs({
+        mapping: 'path/to/the/mapping_min.json',
+        mappingOrigValues: false
     }))
 ...
 ```
@@ -181,6 +234,53 @@ Type: `Boolean`
 ...
 ```
 
+## Methods
+
+### rcs.writeMapping
+
+`rcs.writeMapping(destPath[, options])`
+
+> **Note:** This function should be at the end of the pipe (after all plugins)
+
+This saves the mapping files to ensure all your project got the same selector replacements
+
+#### options
+
+- [cssMapping](#optionscssmapping)
+- [cssMappingMin](#optionscssmappingmin)
+
+##### options.cssMapping
+
+This writes the mapping file. The **original** selectorname is the key. and the **renamed** selectorname is the value. The key has always the selector type (id `#` or class `.`). The string instead of a boolean will give the mapping an alternative name. The default name would be `renaming_map`
+
+Type: `Boolean` or `String`
+
+```js
+...
+    .pipe(rcs())
+    ...
+    .pipe(rcs.saveMapping('./', {
+        cssMapping: 'my_mapping' // this will generate the mapping in `./my_mapping.json`
+    }))
+...
+```
+
+##### options.cssMappingMin
+
+This writes the mapping file. The **renamed** selectorname is the key. and the **original** selectorname is the value (so the opposite of [cssMapping](#optionscssmapping)). The key has always the selector type (id `#` or class `.`). The string instead of a boolean will give the mapping an alternative name. The default name would be `renaming_map_min`
+
+Type: `Boolean` or `String`
+
+```js
+...
+    .pipe(rcs())
+    ...
+    .pipe(rcs.saveMapping('./', {
+        cssMapping: false, // or leave it, if you still want to have it
+        cssMappingMin: 'my_mapping_min' // this will generate the mapping in `./my_mapping_min.json`
+    }))
+...
+```
 
 ## License
 
