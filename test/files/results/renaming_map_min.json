@@ -1,0 +1,13 @@
+{
+	".a": "jp-block",
+	".b": "jp-block__element",
+	".c": "jp-block__element--modifier",
+	".d": "jp-block--modifier",
+	".e": "jp-pseudo",
+	"#f": "id",
+	".g": "jp-attribute",
+	".h": "reveal",
+	".i": "js",
+	".j": "no-js",
+	".k": "js-reveal"
+}

@@ -17,7 +17,7 @@ describe('loadMapping', () => {
     it('should load the mappings file correctly', done => {
         const stream = rcs();
 
-        rcs.loadMapping('./test/files/renaming_map.json');
+        rcs.loadMapping('./test/files/results/renaming_map.json');
 
         stream.on('data', () => {});
 
