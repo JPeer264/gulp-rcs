@@ -3,16 +3,24 @@
 const rcs      = require('rcs-core');
 const path     = require('path');
 const json     = require('json-extra');
+const merge    = require('lodash.merge');
 const gutil    = require('gulp-util');
 const gmatch   = require('gulp-match');
 const through  = require('through2');
 const includes = require('array-includes');
 
-const rcsExport = opt => {
-    opt = opt || {};
+const rcsExport = options => {
+    const optionsDefault = {
+        css: ['.css', '.sass', '.scss'],
+        mappingOrigValues: true
+    };
 
-    opt.css = opt.css || ['.css', '.sass', '.scss'];
-    opt.css = typeof opt.css === 'string' ? [ opt.css ] : opt.css;
+    options = options || {};
+    options = merge(optionsDefault, options);
+
+    options.css = typeof options.css === 'string' ? [ options.css ] : options.css;
+
+    loadMapping(options.mapping, options.mappingOrigValues);
 
     return through.obj(function (file, enc, cb) {
         let data;
@@ -28,18 +36,18 @@ const rcsExport = opt => {
             return;
         }
 
-        if (opt.config !== false) {
-            includeConfig(opt.config);
+        if (options.config !== false) {
+            includeConfig(options.config);
         }
 
-        rcs.selectorLibrary.setExclude(opt.exclude);
+        rcs.selectorLibrary.setExclude(options.exclude);
 
-        if (includes(opt.css, path.extname(file.relative))) {
+        if (includes(options.css, path.extname(file.relative))) {
             replaceFunction = rcs.replace.bufferCss;
         }
 
         // if file is excluded
-        if (gmatch(file, opt.excludeFile)) {
+        if (gmatch(file, options.excludeFile)) {
             this.push(file);
 
             return cb();
@@ -47,9 +55,9 @@ const rcsExport = opt => {
 
         // calling the replace function from rcs-core
         data = replaceFunction(file.contents, {
-            prefix: opt.prefix,
-            suffix: opt.suffix,
-            preventRandomName: opt.preventRandomName,
+            prefix: options.prefix,
+            suffix: options.suffix,
+            preventRandomName: options.preventRandomName,
         });
 
         file.contents = data;
@@ -58,6 +66,33 @@ const rcsExport = opt => {
 
         cb();
     });
+
+    function loadMapping(mappingPath, origValues) {
+        let selectors = mappingPath;
+
+        if (typeof mappingPath === 'string') {
+            selectors = json.readToObjSync(mappingPath, 'utf8');
+        }
+
+        if (!origValues) {
+            let tempSelectors = {};
+
+            for (let key in selectors) {
+                let value = selectors[key];
+                let modKey = key.slice(1, key.length);
+
+                tempSelectors[key.charAt(0) + value] = modKey;
+            }
+
+            selectors = tempSelectors;
+        }
+
+        if (!selectors || typeof selectors !== 'object') {
+            return;
+        }
+
+        rcs.selectorLibrary.setValues(selectors);
+    } // /loadMapping
 
     function includeConfig(pathString) {
         let configObject;
@@ -77,7 +112,7 @@ const rcsExport = opt => {
     }; // /includeConfig
 };
 
-rcsExport.loadMapping = require('./lib/loadMapping');
+// rcsExport.loadMapping = require('./lib/loadMapping');
 rcsExport.writeMapping = require('./lib/writeMapping');
 
 module.exports = rcsExport;
