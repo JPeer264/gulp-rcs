@@ -1,6 +1,6 @@
 {
   "name": "gulp-rcs",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Minify all CSS selectors. The gulp plugin for rcs-core",
   "main": "index.js",
   "scripts": {
