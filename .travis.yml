@@ -2,12 +2,11 @@ language: node_js
 sudo: true
 dist: trusty
 node_js:
-  - "4.0"
-  - "5.0"
-  - "6.0"
-  - "7.0"
+  - 4
+  - 6
+  - 7
 install:
-  - npm install
+  - yarn
 script: npm test
 notifications:
   email:
