@@ -12,7 +12,8 @@ const includes = require('array-includes');
 const rcsExport = options => {
     const optionsDefault = {
         css: ['.css', '.sass', '.scss'],
-        mappingOrigValues: true
+        mappingOrigValues: true,
+        replaceKeyframes: false
     };
 
     options = options || {};
@@ -55,6 +56,7 @@ const rcsExport = options => {
 
         // calling the replace function from rcs-core
         data = replaceFunction(file.contents, {
+            replaceKeyframes: options.replaceKeyframes,
             prefix: options.prefix,
             suffix: options.suffix,
             preventRandomName: options.preventRandomName,

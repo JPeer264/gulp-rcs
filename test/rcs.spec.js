@@ -80,6 +80,57 @@ describe('gulp-rcs', () => {
         stream.end();
     });
 
+    it('should rename also the keyframes', done => {
+        const string = `
+            @keyframes  move {
+                from: {} to: {}
+            }
+
+            .selector {
+                animation: move 4s;
+            }
+
+            .another-selector {
+                animation:     move     4s    ;
+            }
+        `;
+
+        const expectedString = `
+            @keyframes  a {
+                from: {} to: {}
+            }
+
+            .b {
+                animation: a 4s;
+            }
+
+            .c {
+                animation:     a     4s    ;
+            }
+        `;
+        const stream = rcs({
+            replaceKeyframes: true
+        });
+
+        stream.on('data', file => {
+            const contents = file.contents.toString();
+
+            expect(contents).to.equal(expectedString);
+        });
+
+        stream.on('end', done);
+
+        stream.write(new gutil.File({
+            cwd: __dirname,
+            base: fixtures,
+            path: fixtures + '/style.css',
+            contents: new Buffer(string)
+        }));
+
+        stream.end();
+
+    });
+
     it('should exclude a specific file', done => {
         const stream = rcs({
             excludeFile: '**/ignore.js'

@@ -91,6 +91,7 @@ gulp.task('all', () => {
 - [prefix](#optionsprefix)
 - [suffix](#optionssuffix)
 - [preventRandomName](#optionspreventrandomname)
+- [replaceKeyframes](#optionsreplacekeyframes)
 
 **Short example how it could look like:**
 
@@ -230,6 +231,20 @@ Type: `Boolean`
     .pipe(rcs({
         preventRandomName: true,
         prefix: 'my-super-cool-prefix-' // prefix it, otherwise there is no real effect
+    }))
+...
+```
+
+### options.replaceKeyframes
+
+Renames the names in `animation-name` or `animation` if a specific `@keyframes` was triggered before. Default: `false`
+
+Type: `Boolean`
+
+```js
+...
+    .pipe(rcs({
+        replaceKeyframes: true
     }))
 ...
 ```
