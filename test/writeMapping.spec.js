@@ -25,11 +25,10 @@ describe('writeMapping', () => {
             contents: fs.readFileSync(fixtures + '/style.css')
         });
 
-        // reset counter and selectors for tests
-        rcsCore.selectorLibrary.excludes            = [];
-        rcsCore.selectorLibrary.selectors           = {};
-        rcsCore.selectorLibrary.compressedSelectors = {};
-        rcsCore.nameGenerator.resetCountForTests();
+        rcsCore.nameGenerator.setAlphabet('#abcdefghijklmnopqrstuvwxyz');
+        rcsCore.nameGenerator.reset();
+        rcsCore.selectorLibrary.reset();
+        rcsCore.keyframesLibrary.reset();
 
         beforeStream.on('data', () => {});
 
@@ -51,7 +50,7 @@ describe('writeMapping', () => {
 
             filesCounter += 1;
 
-            expect(contents).to.equal(fs.readFileSync(results + '/' + filename, 'utf8'));
+            expect(contents.trim()).to.equal(fs.readFileSync(results + '/' + filename, 'utf8').trim());
         });
 
         stream.on('end', () => {
@@ -79,7 +78,7 @@ describe('writeMapping', () => {
 
             filesCounter += 1;
 
-            expect(contents).to.equal(fs.readFileSync(results + '/' + filename, 'utf8'));
+            expect(contents.trim()).to.equal(fs.readFileSync(results + '/' + filename, 'utf8').trim());
         });
 
         stream.on('end', () => {
@@ -107,7 +106,7 @@ describe('writeMapping', () => {
 
             filesCounter += 1;
 
-            expect(contents).to.equal(fs.readFileSync(results + '/' + filename, 'utf8'));
+            expect(contents.trim()).to.equal(fs.readFileSync(results + '/' + filename, 'utf8').trim());
         });
 
         stream.on('end', () => {

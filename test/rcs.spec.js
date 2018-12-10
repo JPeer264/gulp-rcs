@@ -6,6 +6,7 @@ const path    = require('path');
 const gutil   = require('gulp-util');
 const expect  = require('chai').expect;
 const rcsCore = require('rcs-core');
+const htmlMinifier = require('html-minifier');
 
 const testFiles = './test/files';
 const temp      = testFiles + '/tmp';
@@ -14,11 +15,10 @@ const fixtures  = testFiles + '/fixtures';
 
 describe('gulp-rcs', () => {
     beforeEach(() => {
-        // reset counter and selectors for tests
-        rcsCore.selectorLibrary.excludes            = [];
-        rcsCore.selectorLibrary.selectors           = {};
-        rcsCore.selectorLibrary.compressedSelectors = {};
-        rcsCore.nameGenerator.resetCountForTests();
+        rcsCore.nameGenerator.setAlphabet('#abcdefghijklmnopqrstuvwxyz');
+        rcsCore.nameGenerator.reset();
+        rcsCore.selectorLibrary.reset();
+        rcsCore.keyframesLibrary.reset();
     });
 
     it('should rename all files', done => {
@@ -28,7 +28,11 @@ describe('gulp-rcs', () => {
             const contents = file.contents.toString();
             const filename = path.basename(file.path);
 
-            expect(contents).to.equal(fs.readFileSync(results + '/' + filename, 'utf8'));
+            if (filename === 'index.html') {
+                expect(htmlMinifier.minify(contents, { collapseWhitespace: true })).to.equal(htmlMinifier.minify(fs.readFileSync(results + '/' + filename, 'utf8'), { collapseWhitespace: true }));
+            } else {
+                expect(contents).to.equal(fs.readFileSync(results + '/' + filename, 'utf8'));
+            }
         });
 
         stream.on('end', done);
@@ -91,7 +95,7 @@ describe('gulp-rcs', () => {
             }
 
             .another-selector {
-                animation:     move     4s    ;
+                animation:     move     4s;
             }
         `;
 
@@ -105,7 +109,7 @@ describe('gulp-rcs', () => {
             }
 
             .c {
-                animation:     a     4s    ;
+                animation:     a     4s;
             }
         `;
         const stream = rcs({
@@ -140,7 +144,11 @@ describe('gulp-rcs', () => {
             const contents = file.contents.toString();
             const filename = path.basename(file.path);
 
-            expect(contents).to.equal(fs.readFileSync(results + '/' + filename, 'utf8'));
+            if (filename === 'index.html') {
+                expect(htmlMinifier.minify(contents, { collapseWhitespace: true })).to.equal(htmlMinifier.minify(fs.readFileSync(results + '/' + filename, 'utf8'), { collapseWhitespace: true }));
+            } else {
+                expect(contents).to.equal(fs.readFileSync(results + '/' + filename, 'utf8'));
+            }
         });
 
         stream.on('end', done);
@@ -261,11 +269,10 @@ describe('gulp-rcs', () => {
 
     describe('loadMapping', () => {
         beforeEach(() => {
-            // reset counter and selectors for tests
-            rcsCore.selectorLibrary.excludes            = [];
-            rcsCore.selectorLibrary.selectors           = {};
-            rcsCore.selectorLibrary.compressedSelectors = {};
-            rcsCore.nameGenerator.resetCountForTests();
+            rcsCore.nameGenerator.setAlphabet('#abcdefghijklmnopqrstuvwxyz');
+            rcsCore.nameGenerator.reset();
+            rcsCore.selectorLibrary.reset();
+            rcsCore.keyframesLibrary.reset();
         });
 
         it('should load the mappings file correctly', done => {
@@ -276,7 +283,7 @@ describe('gulp-rcs', () => {
             stream.on('data', () => {});
 
             stream.on('end', () => {
-                expect(rcsCore.selectorLibrary.get('jp-block')).to.equal('a');
+                expect(rcsCore.selectorLibrary.get('.jp-block')).to.equal('a');
                 expect(rcsCore.selectorLibrary.get('.jp-pseudo')).to.equal('e');
 
                 done();
