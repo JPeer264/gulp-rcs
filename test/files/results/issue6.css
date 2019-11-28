@@ -1,0 +1,3 @@
+.a .b a[href="#c"]:before {
+    content: '#6';
+}

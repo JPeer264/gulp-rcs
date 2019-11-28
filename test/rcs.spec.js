@@ -84,6 +84,27 @@ describe('gulp-rcs', () => {
         stream.end();
     });
 
+    it('should not ignore end of ] | issue #6', done => {
+        const stream = rcs();
+
+        stream.on('data', file => {
+            const contents = file.contents.toString();
+
+            expect(contents).to.equal(fs.readFileSync(results + '/issue6.css', 'utf8'));
+        });
+
+        stream.on('end', done);
+
+        stream.write(new gutil.File({
+            cwd: __dirname,
+            base: fixtures,
+            path: fixtures + '/issue6.css',
+            contents: fs.readFileSync(fixtures + '/issue6.css')
+        }));
+
+        stream.end();
+    });
+
     it('should rename also the keyframes', done => {
         const string = `
             @keyframes  move {

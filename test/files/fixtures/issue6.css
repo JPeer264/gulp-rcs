@@ -1,0 +1,3 @@
+.tabsIconed .tabs__nav a[href="#tabs_availability"]:before {
+    content: '#6';
+}

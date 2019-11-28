@@ -40,12 +40,15 @@
     "html-minifier": "^3.5.21",
     "json-extra": "^0.5.0",
     "lodash.merge": "^4.6.0",
-    "rcs-core": "^2.4.1",
     "through2": "^2.0.3"
   },
   "devDependencies": {
     "chai": "^3.5.0",
     "fs-extra": "^1.0.0",
-    "mocha": "^3.2.0"
+    "mocha": "^3.2.0",
+    "rcs-core": "^2.6.3"
+  },
+  "peerDependencies": {
+    "rcs-core": "2.x"
   }
 }
