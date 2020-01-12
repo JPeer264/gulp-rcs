@@ -4,10 +4,10 @@ const rcs      = require('rcs-core');
 const path     = require('path');
 const json     = require('json-extra');
 const merge    = require('lodash.merge');
-const gutil    = require('gulp-util');
 const gmatch   = require('gulp-match');
 const through  = require('through2');
 const includes = require('array-includes');
+const PluginError = require('plugin-error');
 
 const rcsExport = options => {
     const optionsDefault = {
@@ -37,7 +37,7 @@ const rcsExport = options => {
         }
 
         if (file.isStream()) {
-            cb(new gutil.PluginError('gulp-rcs', 'Streaming not supported'));
+            cb(new PluginError('gulp-rcs', 'Streaming not supported'));
             return;
         }
 

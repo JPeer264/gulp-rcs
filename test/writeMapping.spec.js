@@ -3,7 +3,7 @@
 const fs      = require('fs');
 const rcs     = require('../');
 const path    = require('path');
-const gutil   = require('gulp-util');
+const Vinyl   = require('vinyl');
 const expect  = require('chai').expect;
 const rcsCore = require('rcs-core');
 
@@ -18,7 +18,7 @@ describe('writeMapping', () => {
     beforeEach(done => {
         const beforeStream = rcs();
 
-        newFile = new gutil.File({
+        newFile = new Vinyl({
             cwd: __dirname,
             base: fixtures,
             path: fixtures + '/style.css',

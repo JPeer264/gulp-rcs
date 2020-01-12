@@ -3,7 +3,7 @@
 const fs      = require('fs-extra');
 const rcs     = require('../');
 const path    = require('path');
-const gutil   = require('gulp-util');
+const Vinyl   = require('vinyl');
 const expect  = require('chai').expect;
 const rcsCore = require('rcs-core');
 const htmlMinifier = require('html-minifier');
@@ -37,21 +37,21 @@ describe('gulp-rcs', () => {
 
         stream.on('end', done);
 
-        stream.write(new gutil.File({
+        stream.write(new Vinyl({
             cwd: __dirname,
             base: fixtures,
             path: fixtures + '/style.css',
             contents: fs.readFileSync(fixtures + '/style.css')
         }));
 
-        stream.write(new gutil.File({
+        stream.write(new Vinyl({
             cwd: __dirname,
             base: fixtures,
             path: fixtures + '/main.js',
             contents: fs.readFileSync(fixtures + '/main.js')
         }));
 
-        stream.write(new gutil.File({
+        stream.write(new Vinyl({
             cwd: __dirname,
             base: fixtures,
             path: fixtures + '/index.html',
@@ -74,7 +74,7 @@ describe('gulp-rcs', () => {
 
         stream.on('end', done);
 
-        stream.write(new gutil.File({
+        stream.write(new Vinyl({
             cwd: __dirname,
             base: fixtures,
             path: fixtures + '/style.css',
@@ -95,7 +95,7 @@ describe('gulp-rcs', () => {
 
         stream.on('end', done);
 
-        stream.write(new gutil.File({
+        stream.write(new Vinyl({
             cwd: __dirname,
             base: fixtures,
             path: fixtures + '/issue6.css',
@@ -145,7 +145,7 @@ describe('gulp-rcs', () => {
 
         stream.on('end', done);
 
-        stream.write(new gutil.File({
+        stream.write(new Vinyl({
             cwd: __dirname,
             base: fixtures,
             path: fixtures + '/style.css',
@@ -174,28 +174,28 @@ describe('gulp-rcs', () => {
 
         stream.on('end', done);
 
-        stream.write(new gutil.File({
+        stream.write(new Vinyl({
             cwd: __dirname,
             base: fixtures,
             path: fixtures + '/style.css',
             contents: fs.readFileSync(fixtures + '/style.css')
         }));
 
-        stream.write(new gutil.File({
+        stream.write(new Vinyl({
             cwd: __dirname,
             base: results,
             path: results + '/ignore.js',
             contents: fs.readFileSync(results + '/ignore.js')
         }));
 
-        stream.write(new gutil.File({
+        stream.write(new Vinyl({
             cwd: __dirname,
             base: fixtures,
             path: fixtures + '/main.js',
             contents: fs.readFileSync(fixtures + '/main.js')
         }));
 
-        stream.write(new gutil.File({
+        stream.write(new Vinyl({
             cwd: __dirname,
             base: fixtures,
             path: fixtures + '/index.html',
@@ -222,7 +222,7 @@ describe('gulp-rcs', () => {
 
         stream.on('end', done);
 
-        stream.write(new gutil.File({
+        stream.write(new Vinyl({
             cwd: __dirname,
             base: fixtures,
             path: fixtures + '/style.css',
@@ -246,7 +246,7 @@ describe('gulp-rcs', () => {
 
         stream.on('end', done);
 
-        stream.write(new gutil.File({
+        stream.write(new Vinyl({
             cwd: __dirname,
             base: fixtures,
             path: fixtures + '/style.css',
@@ -271,14 +271,14 @@ describe('gulp-rcs', () => {
 
         stream.on('end', done);
 
-        stream.write(new gutil.File({
+        stream.write(new Vinyl({
             cwd: __dirname,
             base: fixtures,
             path: fixtures + '/style.css',
             contents: fs.readFileSync(fixtures + '/style.css')
         }));
 
-        stream.write(new gutil.File({
+        stream.write(new Vinyl({
             cwd: __dirname,
             base: fixtures,
             path: fixtures + '/main.js',
