@@ -76,7 +76,7 @@ gulp.task('all', () => {
             mapping: './config/renaming_map.json'
         }))
         ...
-        .pipe(rcs.saveMapping('./config'))
+        .pipe(rcs.writeMapping('./config'))
 })
 ```
 
@@ -274,7 +274,7 @@ Type: `Boolean` or `String`
 ...
     .pipe(rcs())
     ...
-    .pipe(rcs.saveMapping('./', {
+    .pipe(rcs.writeMapping('./', {
         cssMapping: 'my_mapping' // this will generate the mapping in `./my_mapping.json`
     }))
 ...
@@ -290,7 +290,7 @@ Type: `Boolean` or `String`
 ...
     .pipe(rcs())
     ...
-    .pipe(rcs.saveMapping('./', {
+    .pipe(rcs.writeMapping('./', {
         cssMapping: false, // or leave it, if you still want to have it
         cssMappingMin: 'my_mapping_min' // this will generate the mapping in `./my_mapping_min.json`
     }))
