@@ -35,7 +35,7 @@
   "homepage": "https://github.com/JPeer264/gulp-rcs#readme",
   "dependencies": {
     "array-includes": "^3.0.2",
-    "gulp-match": "^1.0.3",
+    "gulp-match": "^1.1.0",
     "html-minifier": "^3.5.21",
     "json-extra": "^0.5.0",
     "lodash.merge": "^4.6.0",
