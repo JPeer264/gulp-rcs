@@ -25,9 +25,9 @@ describe('writeMapping', () => {
             contents: fs.readFileSync(fixtures + '/style.css')
         });
 
-        rcsCore.nameGenerator.setAlphabet('#abcdefghijklmnopqrstuvwxyz');
-        rcsCore.nameGenerator.reset();
-        rcsCore.selectorLibrary.reset();
+        rcsCore.selectorsLibrary.setAlphabet('#abcdefghijklmnopqrstuvwxyz');
+        rcsCore.selectorsLibrary.reset();
+        rcsCore.keyframesLibrary.setAlphabet('#abcdefghijklmnopqrstuvwxyz');
         rcsCore.keyframesLibrary.reset();
 
         beforeStream.on('data', () => {});

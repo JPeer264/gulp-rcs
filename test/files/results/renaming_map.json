@@ -1,13 +1,15 @@
 {
-	".jp-block": "a",
-	".jp-block__element": "b",
-	".jp-block__element--modifier": "c",
-	".jp-block--modifier": "d",
-	".jp-pseudo": "e",
-	"#id": "f",
-	".jp-attribute": "g",
-	".reveal": "h",
-	".js": "i",
-	".no-js": "j",
-	".js-reveal": "k"
+	"selectors": {
+		".jp-block": "a",
+		".jp-block__element": "b",
+		".jp-block__element--modifier": "c",
+		".jp-block--modifier": "d",
+		".jp-pseudo": "e",
+		".jp-attribute": "f",
+		".reveal": "g",
+		".js": "h",
+		".no-js": "i",
+		".js-reveal": "j",
+		"#id": "a"
+	}
 }

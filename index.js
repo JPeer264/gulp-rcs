@@ -45,7 +45,7 @@ const rcsExport = options => {
             includeConfig(options.config);
         }
 
-        rcs.selectorLibrary.setExclude(options.exclude);
+        rcs.selectorsLibrary.setExclude(options.exclude);
 
         if (includes(options.css, path.extname(file.relative))) {
             rcs.fillLibraries(file.contents.toString(), {
@@ -95,24 +95,11 @@ const rcsExport = options => {
             selectors = json.readToObjSync(mappingPath, 'utf8');
         }
 
-        if (!origValues) {
-            let tempSelectors = {};
-
-            for (let key in selectors) {
-                let value = selectors[key];
-                let modKey = key.slice(1, key.length);
-
-                tempSelectors[key.charAt(0) + value] = modKey;
-            }
-
-            selectors = tempSelectors;
-        }
-
         if (!selectors || typeof selectors !== 'object') {
             return;
         }
 
-        rcs.selectorLibrary.setMultiple(selectors);
+        rcs.mapping.load(selectors, { origValues })
     } // /loadMapping
 
     function includeConfig(pathString) {
@@ -128,7 +115,7 @@ const rcsExport = options => {
 
 
         if (configObject && configObject.exclude) {
-            rcs.selectorLibrary.setExclude(configObject.exclude);
+            rcs.selectorsLibrary.setExclude(configObject.exclude);
         }
     }; // /includeConfig
 };

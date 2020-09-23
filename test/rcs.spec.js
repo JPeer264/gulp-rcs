@@ -15,9 +15,9 @@ const fixtures  = testFiles + '/fixtures';
 
 describe('gulp-rcs', () => {
     beforeEach(() => {
-        rcsCore.nameGenerator.setAlphabet('#abcdefghijklmnopqrstuvwxyz');
-        rcsCore.nameGenerator.reset();
-        rcsCore.selectorLibrary.reset();
+        rcsCore.selectorsLibrary.setAlphabet('#abcdefghijklmnopqrstuvwxyz');
+        rcsCore.selectorsLibrary.reset();
+        rcsCore.keyframesLibrary.setAlphabet('#abcdefghijklmnopqrstuvwxyz');
         rcsCore.keyframesLibrary.reset();
     });
 
@@ -56,6 +56,31 @@ describe('gulp-rcs', () => {
             base: fixtures,
             path: fixtures + '/index.html',
             contents: fs.readFileSync(fixtures + '/index.html')
+        }));
+
+        stream.end();
+    });
+
+    it('should rename vue files | issue #14', done => {
+        const stream = rcs();
+
+        rcsCore.selectorsLibrary.set('.pointer-events-auto');
+        rcsCore.selectorsLibrary.set('.opacity-100');
+
+        stream.on('data', file => {
+            const contents = file.contents.toString();
+            const filename = path.basename(file.path);
+
+            expect(htmlMinifier.minify(contents, { collapseWhitespace: true })).to.equal(htmlMinifier.minify(fs.readFileSync(results + '/' + filename, 'utf8'), { collapseWhitespace: true }));
+        });
+
+        stream.on('end', done);
+
+        stream.write(new Vinyl({
+            cwd: __dirname,
+            base: fixtures,
+            path: fixtures + '/vue.html',
+            contents: fs.readFileSync(fixtures + '/vue.html')
         }));
 
         stream.end();
@@ -125,11 +150,11 @@ describe('gulp-rcs', () => {
                 from: {} to: {}
             }
 
-            .b {
+            .a {
                 animation: a 4s;
             }
 
-            .c {
+            .b {
                 animation:     a     4s;
             }
         `;
@@ -290,9 +315,9 @@ describe('gulp-rcs', () => {
 
     describe('loadMapping', () => {
         beforeEach(() => {
-            rcsCore.nameGenerator.setAlphabet('#abcdefghijklmnopqrstuvwxyz');
-            rcsCore.nameGenerator.reset();
-            rcsCore.selectorLibrary.reset();
+            rcsCore.selectorsLibrary.setAlphabet('#abcdefghijklmnopqrstuvwxyz');
+            rcsCore.selectorsLibrary.reset();
+            rcsCore.keyframesLibrary.setAlphabet('#abcdefghijklmnopqrstuvwxyz');
             rcsCore.keyframesLibrary.reset();
         });
 
@@ -304,8 +329,8 @@ describe('gulp-rcs', () => {
             stream.on('data', () => {});
 
             stream.on('end', () => {
-                expect(rcsCore.selectorLibrary.get('.jp-block')).to.equal('a');
-                expect(rcsCore.selectorLibrary.get('.jp-pseudo')).to.equal('e');
+                expect(rcsCore.selectorsLibrary.get('.jp-block')).to.equal('a');
+                expect(rcsCore.selectorsLibrary.get('.jp-pseudo')).to.equal('e');
 
                 done();
             });
@@ -316,16 +341,18 @@ describe('gulp-rcs', () => {
         it('should load the mappings object correctly', done => {
             const stream = rcs({
                 mapping: {
-                    '.jp-block': 'a',
-                    '.jp-pseudo': 'e'
+                    selectors: {
+                        '.jp-block': 'a',
+                        '.jp-pseudo': 'e'
+                    }
                 }
             });
 
             stream.on('data', () => {});
 
             stream.on('end', () => {
-                expect(rcsCore.selectorLibrary.get('jp-block')).to.equal('a');
-                expect(rcsCore.selectorLibrary.get('.jp-pseudo')).to.equal('e');
+                expect(rcsCore.selectorsLibrary.get('jp-block')).to.equal('a');
+                expect(rcsCore.selectorsLibrary.get('.jp-pseudo')).to.equal('e');
 
                 done();
             });
@@ -336,8 +363,10 @@ describe('gulp-rcs', () => {
         it('should load the mappings object correctly', done => {
             const stream = rcs({
                 mapping: {
-                    '.a': 'jp-block',
-                    '.e': 'jp-pseudo'
+                    selectors: {
+                        '.a': 'jp-block',
+                        '.e': 'jp-pseudo'
+                    }
                 },
                 mappingOrigValues: false
             });
@@ -345,8 +374,8 @@ describe('gulp-rcs', () => {
             stream.on('data', () => {});
 
             stream.on('end', () => {
-                expect(rcsCore.selectorLibrary.get('jp-block')).to.equal('a');
-                expect(rcsCore.selectorLibrary.get('.jp-pseudo')).to.equal('e');
+                expect(rcsCore.selectorsLibrary.get('jp-block')).to.equal('a');
+                expect(rcsCore.selectorsLibrary.get('.jp-pseudo')).to.equal('e');
 
                 done();
             });
