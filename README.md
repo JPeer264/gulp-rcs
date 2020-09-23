@@ -16,13 +16,13 @@
 ## Install
 
 ```sh
-npm i gulp-rcs -D
+npm i rcs-core gulp-rcs -D
 ```
 
 or
 
 ```sh
-yarn add gulp-rcs --dev
+yarn add rcs-core gulp-rcs --dev
 ```
 
 ## Basic Usage (w/ Gulp v3)
