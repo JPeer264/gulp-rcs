@@ -1,6 +1,6 @@
 # gulp-rcs
 
-[![Build Status](https://travis-ci.org/JPeer264/gulp-rcs.svg?branch=main)](https://travis-ci.org/JPeer264/gulp-rcs)
+[![Build Status](https://travis-ci.com/JPeer264/gulp-rcs.svg?branch=main)](https://travis-ci.com/JPeer264/gulp-rcs)
 
 > [rcs](https://www.github.com/jpeer264/node-rcs-core) plugin for [Gulp](https://github.com/gulpjs/gulp).
 
