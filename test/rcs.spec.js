@@ -61,6 +61,31 @@ describe('gulp-rcs', () => {
         stream.end();
     });
 
+    it('should rename vue files | issue #14', done => {
+        const stream = rcs();
+
+        rcsCore.selectorsLibrary.set('.pointer-events-auto');
+        rcsCore.selectorsLibrary.set('.opacity-100');
+
+        stream.on('data', file => {
+            const contents = file.contents.toString();
+            const filename = path.basename(file.path);
+
+            expect(htmlMinifier.minify(contents, { collapseWhitespace: true })).to.equal(htmlMinifier.minify(fs.readFileSync(results + '/' + filename, 'utf8'), { collapseWhitespace: true }));
+        });
+
+        stream.on('end', done);
+
+        stream.write(new Vinyl({
+            cwd: __dirname,
+            base: fixtures,
+            path: fixtures + '/vue.html',
+            contents: fs.readFileSync(fixtures + '/vue.html')
+        }));
+
+        stream.end();
+    });
+
     it('should rename all files with prefixes', done => {
         const stream = rcs({
             prefix: 'prefixed-'
