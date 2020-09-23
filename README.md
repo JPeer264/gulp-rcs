@@ -1,6 +1,6 @@
 # gulp-rcs
 
-[![Build Status](https://travis-ci.org/JPeer264/gulp-rcs.svg?branch=master)](https://travis-ci.org/JPeer264/gulp-rcs)
+[![Build Status](https://travis-ci.org/JPeer264/gulp-rcs.svg?branch=main)](https://travis-ci.org/JPeer264/gulp-rcs)
 
 > [rcs](https://www.github.com/jpeer264/node-rcs-core) plugin for [Gulp](https://github.com/gulpjs/gulp).
 
@@ -65,7 +65,7 @@ gulp.task('remainings', ['css'], () => {
 gulp.task('default', ['css', 'remainings']);
 ```
 
-Working with mappings (the mapping can look like [this](https://github.com/JPeer264/gulp-rcs/blob/master/test/files/results/renaming_map.json)):
+Working with mappings (the mapping can look like [this](https://github.com/JPeer264/gulp-rcs/blob/main/test/files/results/renaming_map.json)):
 
 ```js
 const rcs = require('gulp-rcs');
